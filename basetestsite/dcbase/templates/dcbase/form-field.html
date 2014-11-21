@@ -1,0 +1,19 @@
+{% load widget_tweaks %}
+
+{% render_field field class+="form-control" %}
+
+{% if not field.is_hidden %}
+  {% if field.errors %}
+    <span class="help-block">
+      {% for error in field.errors %}
+        <div id="error_{{ forloop.counter }}_{{ field.auto_id }}">
+          <strong>{{ error }}</strong>
+        </div>
+      {% endfor %}
+    </span>
+  {% endif %}
+
+  {% if field.help_text %}
+    <span class="help-block">{{ field.help_text }}</span>
+  {% endif %}
+{% endif %}
