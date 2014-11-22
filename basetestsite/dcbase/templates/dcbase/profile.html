@@ -1,6 +1,5 @@
-{% extends "dcbase/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
     Profile for {{ user.username }}
-    <a href="{% url "account_change_password" %}">change password</a>
 {% endblock %}

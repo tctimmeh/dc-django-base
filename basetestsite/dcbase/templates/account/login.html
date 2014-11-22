@@ -7,6 +7,7 @@
 
 {% block style %}
     <style>
+        #login-dialog { max-width: 750px; }
         h1, h4 { text-align: center; }
         @media (min-width: 992px) { #login-local { border-left: 1px solid black; } }
         .list-group-item { font-weight: bold; text-align: center; }
@@ -16,8 +17,7 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="container wide-panel-dialog">
+    <div id="login-dialog" class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h1>{% trans "Sign In" %}</h1>

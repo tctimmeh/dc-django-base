@@ -3,5 +3,14 @@
 {% block pageTitle %}DC Base Test Page{% endblock %}
 {% block content %}
     Hello, World!
-    <a href="{% url "authwall" %}">Auth wall</a>
+    <ul>
+        <li><a href="{% url "authwall" %}">Auth wall</a></li>
+        <li><a href="{% url "account_signup" %}">signup</a></li>
+        <li><a href="{% url "account_login" %}">login</a></li>
+        <li><a href="{% url "account_logout" %}">logout</a></li>
+        <li><a href="{% url "account_change_password" %}">change password</a></li>
+        <li><a href="{% url "account_email" %}">change email</a></li>
+        <li><a href="{% url "account_inactive" %}">inactive</a></li>
+        <li><a href="{% url "account_email_verification_sent" %}">email confirm sent</a></li>
+    </ul>
 {% endblock %}
