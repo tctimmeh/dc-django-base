@@ -8,6 +8,17 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
+    'dcbase',
+    'dcbasetest',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+
+    'widget_tweaks',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -15,14 +26,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
-    'dcbase',
-    'dcbasetest',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-
 )
 
 MIDDLEWARE_CLASSES = (

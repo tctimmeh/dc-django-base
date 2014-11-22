@@ -1,5 +1,5 @@
 {% spaceless %}
-    {% comment %}
+{% comment %}
 Base template that all app pages should extend.
 
 Overridable blocks:
@@ -27,54 +27,16 @@ Overridable blocks:
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
         <style>
-            @media (max-width: 992px) {
-                .navbar {
-                    margin-bottom: 10px;
-                }
-            }
-
-            @media (max-width: 768px) {
-                .navbar-collapse {
-                    text-align: right;
-                }
-            }
-
-            html, body {
-                height: 100%;
-            }
-
-            #bodyWrapper {
-                min-height: 100%;
-                position: relative;
-            }
-
-            #bodyContent {
-                padding-bottom: 46px;
-            }
-
-            div#headerBar, div#footer {
-                border-radius: 0px;
-            }
-
-            div#footer {
-                z-index: -1;
-                min-height: 0;
-                width: 100%;
-                position: absolute;
-                bottom: 0;
-                margin-bottom: 0;
-                padding: 0 3px;
-            }
-
-            div#footer * {
-                margin-top: 3px;
-                margin-bottom: 3px;
-            }
-
-            .form-actions :not(:first-child) {
-                margin-left: 3px;
-            }
-
+            @media (max-width: 992px) { .navbar { margin-bottom: 10px; } }
+            @media (max-width: 768px) { .navbar-collapse { text-align: right; } }
+            html, body { height: 100%; }
+            #bodyWrapper { min-height: 100%; position: relative; }
+            #bodyContent { padding-bottom: 46px; }
+            div#headerBar, div#footer { border-radius: 0px; }
+            div#footer { z-index: -1; min-height: 0; width: 100%; position: absolute;
+                bottom: 0; margin-bottom: 0; padding: 0 3px; }
+            div#footer * { margin-top: 3px; margin-bottom: 3px; }
+            .form-actions :not(:first-child) { margin-left: 3px; }
             {% block style %}{% endblock %}
         </style>
 
