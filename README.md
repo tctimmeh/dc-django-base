@@ -35,6 +35,14 @@
     ACCOUNT_EMAIL_REQUIRED = True
     ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
+For e-mail verification on user accounts be sure to enable it in settings:
+
+    ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+For development set a console email backend instead:
+
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
 ### Urls
 
     url(r'', include('dcbase.urls')),
