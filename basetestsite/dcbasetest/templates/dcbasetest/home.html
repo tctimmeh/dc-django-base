@@ -12,5 +12,9 @@
         <li><a href="{% url "account_email" %}">change email</a></li>
         <li><a href="{% url "account_inactive" %}">inactive</a></li>
         <li><a href="{% url "account_email_verification_sent" %}">email confirm sent</a></li>
+        <li><a href="{% url "socialaccount_login_cancelled" %}">social login cancelled</a></li>
+        <li><a href="{% url "socialaccount_login_error" %}">social login error</a></li>
+        <li><a href="{% url "socialaccount_signup" %}">social login signup</a></li>
+        <li><a href="{% url "socialaccount_connections" %}">social login connections</a></li>
     </ul>
 {% endblock %}
