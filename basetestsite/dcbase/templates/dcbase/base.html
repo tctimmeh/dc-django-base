@@ -99,7 +99,9 @@ Overridable blocks:
             </div>
         </noscript>
 
-        {% include "dcbase/messages.html" %}
+        <div class="container">
+            {% include "dcbase/messages.html" %}
+        </div>
 
         {% block content %}{% endblock %}
         {# END BODY #}

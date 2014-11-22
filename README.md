@@ -12,6 +12,7 @@
         "django.core.context_processors.static",
         "django.core.context_processors.tz",
         "django.contrib.messages.context_processors.messages",
+        "django.core.context_processors.request",
         "allauth.account.context_processors.account",
         "allauth.socialaccount.context_processors.socialaccount",
     )
