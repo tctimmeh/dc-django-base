@@ -52,3 +52,17 @@ For development set a console email backend instead:
 ### Urls
 
     url(r'', include('dcbase.urls')),
+
+### Templates
+
+Create a `base.html` in the root of your templates directory. Extend `dcbase/base.html` and override
+blocks that are global to your site. For example:
+
+    {% extends "dcbase/base.html" %}
+    
+    {% block headerBarBrand %}My Site Brand{% endblock %}
+    {% block footerBar %}
+        Footer content!
+    {% endblock %}
+
+

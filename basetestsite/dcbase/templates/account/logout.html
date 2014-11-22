@@ -1,26 +1,26 @@
-{% extends "dcbase/base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 
 {% block pageTitle %}{% trans "Sign Out" %}{% endblock %}
 
-{% block style %}
-    .row { max-width: 25em; margin: auto; }
-{% endblock %}
-
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <h1>{% trans "Sign Out" %}</h1>
+    <div class="container narrow-panel-dialog">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>{% trans "Sign Out" %}</h1>
+            </div>
+            <div class="panel-body">
 
-            <p>{% trans 'Are you sure you want to sign out?' %}</p>
+                <p>{% trans 'Are you sure you want to sign out?' %}</p>
 
-            <form method="post" action="{% url 'account_logout' %}">
-                {% csrf_token %}
-                {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-                {% endif %}
-                <button class="btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
-            </form>
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <button class="btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

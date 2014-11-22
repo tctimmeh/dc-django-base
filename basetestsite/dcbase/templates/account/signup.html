@@ -1,14 +1,15 @@
-{% extends "dcbase/base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 
 {% block pageTitle %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-offset-3 col-sm-6">
+    <div class="container narrow-panel-dialog">
+        <div class="panel panel-default">
+            <div class="panel-heading">
                 <h1>{% trans "Sign Up" %}</h1>
-
+            </div>
+            <div class="panel-body">
                 <p>
                     {% blocktrans %}
                         Already have an account? Then please <a href="{{ login_url }}">sign in</a>.

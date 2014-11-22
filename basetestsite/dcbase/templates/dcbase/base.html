@@ -25,27 +25,27 @@ Overridable blocks:
         <title>{% block pageTitle %}{% endblock %}</title>
 
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        {% block head %}{% endblock %}
 
         <style>
             @media (max-width: 992px) { .navbar { margin-bottom: 10px; } }
             @media (max-width: 768px) { .navbar-collapse { text-align: right; } }
+            @media (min-width: 768px) { .box-shadow-dialog { box-shadow: 2px 2px 20px 0px; border-radius: 15px; padding: 0px 20px 15px;} }
             html, body { height: 100%; }
             #bodyWrapper { min-height: 100%; position: relative; }
-            #bodyContent { padding-bottom: 46px; }
+            #content-wrapper { padding-bottom: 45px; }
             div#headerBar, div#footer { border-radius: 0px; }
             div#footer { z-index: -1; min-height: 0; width: 100%; position: absolute;
                 bottom: 0; margin-bottom: 0; padding: 0 3px; }
             div#footer * { margin-top: 3px; margin-bottom: 3px; }
-            .form-actions :not(:first-child) { margin-left: 3px; }
-            {% block style %}{% endblock %}
+            .narrow-panel-dialog { max-width: 450px; }
+            .wide-panel-dialog { max-width: 750px; }
         </style>
-
-        {% block head %}{% endblock %}
-
+        {% block style %}{% endblock %}
     </head>
     <body>
 
-    <!--[if lt IE 9]>
+<!--[if lt IE 9]>
   <div class="alert alert-danger">
     <h4>Browser Incompatibility</h4>
     <p>
@@ -103,7 +103,9 @@ Overridable blocks:
             {% include "dcbase/messages.html" %}
         </div>
 
+        <div id="content-wrapper">
         {% block content %}{% endblock %}
+        </div>
         {# END BODY #}
 
         {# BEGIN FOOTER #}
@@ -119,16 +121,6 @@ Overridable blocks:
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.50/jquery.form.min.js"></script>
     <script>
         var dcbase = {
-            showAjaxError: function (jqXHR) {
-                var errorBox = $('<div class="ajaxError fade in alert alert-danger">' +
-                        '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                        '<h4>Operation Failed</h4>' +
-                        '<p><strong>' + jqXHR.statusText + '</strong></p>' +
-                        '<p>' + this.type + ': ' + this.url + '</p>' +
-                        '</div>'
-                );
-                $('#bodyContent').append(errorBox);
-            },
             createUrl: function (urlPattern) {
                 var parts = urlPattern.split('0');
                 var finalUrl = '';

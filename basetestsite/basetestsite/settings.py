@@ -8,8 +8,8 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
-    'dcbase',
     'dcbasetest',
+    'dcbase',
 
     'allauth',
     'allauth.account',
