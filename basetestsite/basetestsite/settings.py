@@ -18,6 +18,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.google',
 
     'widget_tweaks',
+    'django_gravatar',
 
     'django.contrib.admin',
     'django.contrib.auth',

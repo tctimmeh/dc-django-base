@@ -1,20 +1,7 @@
 {% spaceless %}
-{% comment %}
-Base template that all app pages should extend.
-
-Overridable blocks:
-- pageTitle: the title of the page
-- style: inline CSS to include in the page style tag
-- head: extra content to include in the page head tag
-- headerBarBrand: content for the "brand" link in the upper right, usually the app title
-- headerBarBrandLink: target of the "brand" link, usually the app's home page
-- headerBarRight: extra nav items (<li>'s) to include on the right side of the header bar
-- content: the main content of the page
-- footerBar: content for the footer nav bar
-- script: any additional scripts or script links the page needs
-{% endcomment %}
-
     {% load i18n %}
+    {% load gravatar %}
+    {% load account %}
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -30,16 +17,21 @@ Overridable blocks:
         <style>
             @media (max-width: 992px) { .navbar { margin-bottom: 10px; } }
             @media (max-width: 768px) { .navbar-collapse { text-align: right; } }
-            @media (min-width: 768px) { .box-shadow-dialog { box-shadow: 2px 2px 20px 0px; border-radius: 15px; padding: 0px 20px 15px;} }
+            @media (min-width: 768px) {
+                .box-shadow-dialog { box-shadow: 2px 2px 20px 0px; border-radius: 15px; padding: 0px 20px 15px;}
+                div#headerBar .navbar-nav, div#headerBar div:first-child { height: 50px; }
+                .navbar-brand, .navbar-nav li { position: relative; top: 50%; transform: translateY(-50%); }
+            }
             html, body { height: 100%; }
             #bodyWrapper { min-height: 100%; position: relative; }
             #content-wrapper { padding-bottom: 45px; }
-            div#headerBar, div#footer { border-radius: 0px; }
+            div#headerBar, div#footer { border-radius: 0px; vertical-align: middle; }
             div#footer { z-index: -1; min-height: 0; width: 100%; position: absolute;
                 bottom: 0; margin-bottom: 0; padding: 0 3px; }
             div#footer * { margin-top: 3px; margin-bottom: 3px; }
+            #logged-in-user-name { margin-right: 10px; }
+            .gravatar { box-shadow: 0px 0px 10px 1px white; border-radius: 5px; }
             .narrow-panel-dialog { max-width: 450px; }
-            .wide-panel-dialog { max-width: 750px; }
         </style>
         {% block style %}{% endblock %}
     </head>
@@ -79,7 +71,12 @@ Overridable blocks:
 
                         {% if user.is_authenticated %}
                             <li><a id="header-logout" href="{% url "account_logout" %}">{% trans "Logout" %}</a></li>
-                            <li><a id="header-user-profile" href={% url "account_profile" %}>{{ user.username }}</a></li>
+                            <li>
+                                <a id="header-user-profile" href={% url "account_profile" %}>
+                                    <strong id="logged-in-user-name">{% user_display user %}</strong>
+                                    {% gravatar user.email 35 %}
+                                </a>
+                            </li>
                         {% else %}
                             <li><a id="header-login" href="{% url "account_login" %}">{% trans "Login" %}</a></li>
                         {% endif %}
@@ -137,5 +134,4 @@ Overridable blocks:
 
     </body>
     </html>
-
 {% endspaceless %}

@@ -30,6 +30,7 @@
         'allauth.socialaccount',
         'allauth.socialaccount.providers.*', # PUT ALL OAUTH PROVIDERS HERE
         'widget_tweaks',
+        'django_gravatar',
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
