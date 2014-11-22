@@ -9,7 +9,7 @@ Overridable blocks:
 - headerBarBrand: content for the "brand" link in the upper right, usually the app title
 - headerBarBrandLink: target of the "brand" link, usually the app's home page
 - headerBarRight: extra nav items (<li>'s) to include on the right side of the header bar
-- body: the main content of the page
+- content: the main content of the page
 - footerBar: content for the footer nav bar
 - script: any additional scripts or script links the page needs
 {% endcomment %}
@@ -90,22 +90,18 @@ Overridable blocks:
         {# END HEADER BAR #}
 
         {# BEGIN BODY #}
-        <div id="bodyContent" class="container">
-            <noscript>
-                <div class="alert alert-danger">
-                    <h4>Uh oh!</h4>
+        <noscript>
+            <div class="alert alert-danger">
+                <h4>Uh oh!</h4>
+                <p>It looks like you have scripts disabled in your browser.</p>
+                <p>This site won't be very useful without javascript. Please enable scripting for this site before
+                    continuing.</p>
+            </div>
+        </noscript>
 
-                    <p>It looks like you have scripts disabled in your browser.</p>
+        {% include "dcbase/messages.html" %}
 
-                    <p>This site won't be very useful without javascript. Please enable scripting for this site before
-                        continuing.</p>
-                </div>
-            </noscript>
-
-            {% include "dcbase/messages.html" %}
-
-            {% block content %}{% endblock %}
-        </div>
+        {% block content %}{% endblock %}
         {# END BODY #}
 
         {# BEGIN FOOTER #}
