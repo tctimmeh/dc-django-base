@@ -99,3 +99,8 @@ blocks to provide the dialog content:
 
 Include `dcbase/form.html` or `dcbase/form-horizontal.html` to create consistently styled forms. These templates expect a context
 variable called `form`.
+
+Set the `autofocus` context variable to the id of a form field which should be automatically focused when the page loads. For example
+
+    {% include "dcbase/form.html" with autofocus="id_important_field" %}
+

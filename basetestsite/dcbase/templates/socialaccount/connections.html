@@ -1,11 +1,9 @@
-{% extends "dcbase/base-narrow-dialog.html" %}
+{% extends "dcbase/profile_edit.html" %}
 {% load i18n %}
 
 {% block pageTitle %}{% trans "Account Connections" %}{% endblock %}
 
-{% block panelHeading %}
-    <h1>{% trans "Account Connections" %}</h1>
-{% endblock %}
+{% block panelHeading %}{% trans "Social Account Connections" %}{% endblock %}
 
 {% block panelBody %}
     {% if form.accounts %}
