@@ -104,3 +104,38 @@ Set the `autofocus` context variable to the id of a form field which should be a
 
     {% include "dcbase/form.html" with autofocus="id_important_field" %}
 
+## User Profiles
+
+Create app-specific user profile data by following these instructions. 
+
+Create a database model to encapsulate the profile data. Give it a `OneToOneField` to the `User` model and call it `user`.
+
+Create a `ModelForm` to update the new profile model.
+
+Create a URL to the view that will edit the new profile model. To be consistent with other profile urls it should be in the form
+of `^accounts/profile/edit/CATEGORY/$`, where CATEGORY is unique to your app.  Make sure the url has a name, such as
+`account_profile_edit_CATEGORY`.
+
+Create the view for the above URL. The view class should look similar to this:
+
+    @profile_form_view()
+    class ProfileEditCATEGORYView(ProfileEditFormView):
+        form_class = MyProfileForm
+        profile_nav_name = _('Nav Name')
+        profile_panel_name = _('Panel Name')
+        profile_edit_url = reverse_lazy('account_profile_edit_CATEGORY')
+    
+    profileEditCATEGORYView = login_required(ProfileEditCATEGORYView.as_view())
+
+The class-level attribute are:
+
+* **profile_nav_name**: the title that will appear on the user profile navigation bar
+* **profile_panel_name**: the title that will appear on the panel that holds the form
+* **profile_edit_url**: URL to the page that allows editing of this profile model
+
+After these things are done a new pane will appear in the user's profile edit page. This new page will contain the form for the
+apps profile model.
+
+New users will automatically get an instance of the new profile model in the database. If this is a new profile model for a site
+with existing users then be sure to use a database migration to create an instance for every existing user.
+

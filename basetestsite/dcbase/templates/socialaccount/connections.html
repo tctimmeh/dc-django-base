@@ -1,10 +1,6 @@
 {% extends "dcbase/profile_edit.html" %}
 {% load i18n %}
 
-{% block pageTitle %}{% trans "Account Connections" %}{% endblock %}
-
-{% block panelHeading %}{% trans "Social Account Connections" %}{% endblock %}
-
 {% block panelBody %}
     {% if form.accounts %}
         <p>{% blocktrans %}You can sign in to your account using any of the following third party accounts:{% endblocktrans %}</p>

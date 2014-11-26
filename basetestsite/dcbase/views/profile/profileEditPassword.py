@@ -1,7 +1,7 @@
 from allauth.account.views import PasswordChangeView
-from dcbase.views.profile.profileEdit import ProfileEditor
+from dcbase.lib.profileEditor import ProfileEditor
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 
 
 class ProfileEditPasswordView(PasswordChangeView):

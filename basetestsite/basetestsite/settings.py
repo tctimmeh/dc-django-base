@@ -1,4 +1,5 @@
 import os
+from django.utils.translation import ugettext_lazy as _
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = 'yda$68m_u321d#kh&@zs*0sp(=hbbkm(3(53g@22z*f@m#x(%s'
@@ -31,6 +32,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -86,4 +88,12 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LANGUAGES = (
+  ('de', _('German')),
+  ('en-us', _('English')),
+  ('es', _('Spanish')),
+  ('fr', _('French')),
+  ('it', _('Italian')),
+)
 
