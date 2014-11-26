@@ -4,52 +4,31 @@
 
 ### Settings
 
-    TEMPLATE_CONTEXT_PROCESSORS = (
-        "django.contrib.auth.context_processors.auth",
-        "django.core.context_processors.debug",
-        "django.core.context_processors.i18n",
-        "django.core.context_processors.media",
-        "django.core.context_processors.static",
-        "django.core.context_processors.tz",
-        "django.contrib.messages.context_processors.messages",
-        "django.core.context_processors.request",
-        "allauth.account.context_processors.account",
-        "allauth.socialaccount.context_processors.socialaccount",
-    )
-     
-    AUTHENTICATION_BACKENDS = (
-        "django.contrib.auth.backends.ModelBackend",
-        "allauth.account.auth_backends.AuthenticationBackend",
-    )
-    
+Start the site's settings by importing the `base_settings` file.
+
+    from dcbase.base_settings import *
+
+Refer to this file to see the complete list of settings that are included by default. The following are settings that your 
+site **must** provide:
+
+* BASE_DIR (typically `os.path.dirname(os.path.dirname(__file__))`)
+* SECRET_KEY (source the production key from a secure place, **not** a text file in a public source repository)
+* ROOT_URLCONF
+* WSGI_APPLICATION
+* DATABASES
+* EMAIL_BACKEND (consider using `django.core.mail.backends.console.EmailBackend` for testing)
+
+Add the site's apps to `INSTALLED_APPS` by prepending them to the base apps:
+
     INSTALLED_APPS = (
-        'YOUR_APP_HERE',
-        'dcbase',
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
-        'allauth.socialaccount.providers.*', # PUT ALL OAUTH PROVIDERS HERE
-        'widget_tweaks',
-        'django_gravatar',
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.sites',
-    )
-    
-    SITE_ID = 1
-    
-    ACCOUNT_EMAIL_REQUIRED = True
+        'some_app',
+        'allauth.socialaccount.providers.google',
+    ) + INSTALLED_APPS
 
-For e-mail verification on user accounts be sure to enable it in settings:
+Other "list" settings can be modified in a similar way. 
 
-    ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-
-For development set a console email backend (unless you have a real SMTP server, then configure that):
-
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+Because the order of middleware is important it may be required to copy and modify the entire `MIDDLEWARE_CLASSES` setting
+to inject a new middleware class in the middle of the list.
 
 ### Urls
 
