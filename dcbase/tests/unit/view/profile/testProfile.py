@@ -7,7 +7,6 @@ class TestProfileView(UnitTestCase, RequiresLogin):
     url = reverse('account_profile')
 
     def test_rendersProfileTemplate(self):
-        self.user = self.createUser()
-        self.logInAs(self.user)
+        self.user = self.createUser(logIn=True)
         response = self.client.get(self.url)
         self.assertTemplateUsed(response, 'dcbase/profile.html')
