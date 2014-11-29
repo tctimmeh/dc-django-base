@@ -7,7 +7,7 @@ Installation
 Settings
 ````````
 
-Start the site's settings by importing the ``base_settings`` file.
+Start the site's settings by importing the ``base_settings`` file::
 
     from dcbase.base_settings import *
 
@@ -129,4 +129,41 @@ apps profile model.
 
 New users will automatically get an instance of the new profile model in the database. If this is a new profile model for a site
 with existing users then be sure to use a database migration to create an instance for every existing user.
+
+Testing
+-------
+
+This project provides several classes with helper methods for testing. These classes are outlined below.
+
+Base Test Case
+``````````````
+
+An abstract base test class is provided as `dcbase.tests.BaseTestCase`. This class provides the following methods:
+
+* **randStr**: generate a random string
+* **createUser**: create a normal user
+* **createAdminUser**: create an admin user
+* **createSuperUser**: create a super user
+* **expireSession**: expire a session
+* **logInAs**: log a user in
+* **logout**: logs out the currently logged in user
+
+Unit Testing
+````````````
+
+Normal "unit" tests should derive from `dcbase.tests.unit.UnitTestCase`. This class provides the following methods:
+
+* **assertResponseStatusIsOk**
+* **assertResponseStatusIsNotFound**
+* **assertResponseStatusIsNotAuthorized**
+
+Requires Login
+~~~~~~~~~~~~~~
+
+A mixin class for testing views that verifies that the view requires a logged in user. This mixin tests that:
+
+* An anonymous user is redirected to the log in page
+* The view returns status ok for logged in users
+
+This mixin class requires that `self.url` contains the url of the view under test.
 
