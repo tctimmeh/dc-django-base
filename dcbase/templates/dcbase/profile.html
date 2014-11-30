@@ -7,19 +7,22 @@
 
 {% block style %}
     <style>
-        #userProfile .gravatar { float: left; margin-right: 20px; border: 1px solid black; box-shadow: 0px 0px 25px 0px; }
+        #userProfile .gravatar { float: left; margin-right: 20px; margin-top: 20px; border: 1px solid black; box-shadow: 0px 0px 25px 0px; }
         #userProfile .gravatar-profile { display: block; margin-top: 10px; }
     </style>
 {% endblock %}
 
 {% block content %}
     <div id="userProfile" class="container">
-        {% gravatar user.email 150 %}
-        <h1>{% user_display user %}</h1>
+        {% gravatar profileUser.email 150 %}
+        <h1>{% user_display profileUser %}</h1>
         <p>
-            {{ user.first_name }} {{ user.last_name }}
+            {{ profileUser.first_name }} {{ profileUser.last_name }}
         </p>
-        <a href="{% url "account_profile_edit" %}" id="edit-profile" class="btn btn-default">{% trans "Edit Profile" %}</a>
-        <a class="gravatar-profile" href="{% gravatar_profile_url user %}">Gravatar <span class="glyphicon glyphicon-link"></span></a>
+
+        {% if profileUser == user %}
+            <a href="{% url "account_profile_edit" %}" id="edit-profile" class="btn btn-default">{% trans "Edit Profile" %}</a>
+            <a class="gravatar-profile" href="{% gravatar_profile_url user %}">Gravatar <span class="glyphicon glyphicon-link"></span></a>
+        {% endif %}
     </div>
 {% endblock %}

@@ -1,9 +1,10 @@
-from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
+from django.core.urlresolvers import reverse
+from django.views.generic import RedirectView
 
 
-class ProfileView(TemplateView):
-    template_name = 'dcbase/profile.html'
+class ProfileView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('account_profile_user', kwargs={'username': self.request.user.username})
 
+profileView = ProfileView.as_view()
 
-profileView = login_required(ProfileView.as_view())

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load gravatar %}
+{% load user_tags %}
 
 {% block pageTitle %}{{ user.username }}{% endblock %}
 
@@ -10,7 +11,7 @@
             <div class="col-md-offset-3 col-md-9">
                 <h1>
                     {% gravatar user.email 50 %}
-                    {{ user.username }}
+                    {% userNameLink user %}
                 </h1>
             </div>
         </div>
