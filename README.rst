@@ -203,14 +203,20 @@ BrowserTestCase
 The browser test case derives from `BaseTestCase` and provides several other features. Create a new browser test case using this
 pattern::
 
-    class BrowserTestCase(LiveServerTestCase, BaseTestCase):
+    class TestThingDetail(BrowserTestCase):
         _pageClass = ThingDetailPage
         _requiresLogin = True           # Optional
 
+        def setUp(self):
+            thing = create_a_thing()
+            self._urlFields['thingId'] = thing.id
+            super().setUp()
+
 In the above example `_pageClass` is the class of the PageObject for the page under test. The `_requiresLogin` property tells
 the test case that this page requires the user to be logged in.  When a browser test case starts it will launch the browser,
-log in a user if required, and then browser to the page represented by the given PageObject. An instance of the page object is
-available from a property called `page`.
+log in a user if required, and then browse to the page represented by the given PageObject. Variable fields for the page object
+URL can be provided during the test case's setUp method, as shown above. An instance of the page object is available from a
+property called `page`.
 
 By default, `BrowserTestCase` uses the "Chrome" webdriver. Set the `BROWSER` environment variable to the name of a different
 webdriver class to change which browser is used to run the tests.

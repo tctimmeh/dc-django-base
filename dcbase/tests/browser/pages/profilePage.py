@@ -2,7 +2,7 @@ from dcbase.tests.browser.pages.pageObject import PageObject
 
 
 class ProfilePage(PageObject):
-    _urlPattern = '/accounts/profile/'
+    _urlPattern = '/accounts/user/{username}/'
     _pageName = 'Profile'
 
     def clickProfileEdit(self):

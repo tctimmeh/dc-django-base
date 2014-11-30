@@ -6,9 +6,9 @@ class UnitTestCase(TestCase, BaseTestCase):
     """
     Base test case for unit tests using the Django test client.
     """
-    def setUp(self):
-        BaseTestCase.setUp(self)
-        super().setUp()
+    def __init__(self, methodName):
+        BaseTestCase.__init__(self)
+        super().__init__(methodName)
 
     def tearDown(self):
         BaseTestCase.tearDown(self)

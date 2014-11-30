@@ -8,7 +8,7 @@ from django.utils import translation
 
 
 class BaseTestCase(ABC):
-    def setUp(self):
+    def __init__(self):
         self._loggedInUser = None
         self._passwordsByUser = {}
 
@@ -52,7 +52,7 @@ class BaseTestCase(ABC):
         email = email or '%s@host.com' % self.randStr()
 
         user = User.objects.create_user(username=userName, password=password, email=email, first_name=self.randStr(), last_name=self.randStr())
-        self._passwordsByUser[user] = password
+        self._cachePasswordForUser(user, password)
 
         EmailAddress.objects.create(user=user, email=email, verified=True, primary=True)
 
@@ -97,4 +97,7 @@ class BaseTestCase(ABC):
         :param default: A default password to return if no cached password is found
         """
         return self._passwordsByUser.get(user, default)
+
+    def _cachePasswordForUser(self, user, password):
+        self._passwordsByUser[user] = password
 

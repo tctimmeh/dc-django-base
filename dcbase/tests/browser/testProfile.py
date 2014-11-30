@@ -5,7 +5,12 @@ from dcbase.tests.browser.pages.profilePage import ProfilePage
 
 class TestProfilePage(BrowserTestCase):
     _pageClass = ProfilePage
-    _requiresLogin = True
+
+    def setUp(self):
+        user = self.createUser()
+        self.logInAs(user)
+        self._urlFields['username'] = user.username
+        super().setUp()
 
     def test_editProfileButtonGoesToProfileEditPage(self):
         self.page.clickProfileEdit()

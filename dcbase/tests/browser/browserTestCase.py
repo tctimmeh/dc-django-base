@@ -33,7 +33,6 @@ class BrowserTestCase(LiveServerTestCase, BaseTestCase):
         super().tearDownClass()
 
     def setUp(self):
-        BaseTestCase.setUp(self)
         super().setUp()
         if self._requiresLogin and not self._loggedInBrowserUser:
             user = self.createUser()
