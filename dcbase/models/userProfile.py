@@ -1,3 +1,4 @@
+from dcbase.decorator.profileModel import profile_model
 from dcbase.lib.profileEditor import ProfileEditor
 from django.conf import settings
 from django.contrib.auth import user_logged_in
@@ -9,6 +10,7 @@ from django.utils import translation
 from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
 
 
+@profile_model()
 class UserProfile(Model):
     user = OneToOneField(User, related_name='profile')
     language = CharField(_('Language'), max_length=10, choices=settings.LANGUAGES, default='en')

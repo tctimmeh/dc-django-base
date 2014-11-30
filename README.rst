@@ -157,13 +157,60 @@ Normal "unit" tests should derive from `dcbase.tests.unit.UnitTestCase`. This cl
 * **assertResponseStatusIsNotFound**
 * **assertResponseStatusIsNotAuthorized**
 
-Requires Login
-~~~~~~~~~~~~~~
+Requires Login Mixin
+~~~~~~~~~~~~~~~~~~~~
 
-A mixin class for testing views that verifies that the view requires a logged in user. This mixin tests that:
+The `dcbase.tests.unit.view.mixin.RequiresLogin` class is a mixin class for testing views that verifies that the
+view requires a logged in user. This mixin tests that:
 
 * An anonymous user is redirected to the log in page
 * The view returns status ok for logged in users
 
 This mixin class requires that `self.url` contains the url of the view under test.
 
+Browser Testing
+```````````````
+
+Browser testing, using selenium webdriver, is comprised of two main parts. First, a `PageObject` must be created to
+represent each page that the tests will interact with. Second, a test case derived from
+`dcbase.tests.browser.BrowserTestCase` must be created for the page under test. Each page object and test case has
+a property, `browser`, which is the selenium webdriver object for the browser used in the tests.
+
+Page Object
+~~~~~~~~~~~
+
+A page object abstracts all interaction with a web page. Tests should never make selenium calls directly. Follow this pattern
+to create a page object::
+
+    class ThingDetailPage(PageObject):
+        _urlPattern = '/thing/{thingId}/'
+        _pageName = 'Thing Detail'
+
+The PageObject requires 2 class-level attributes: `_urlPattern` and `_pageName`. The url pattern describes the URL of the page.
+Use python format specifiers in place of the variable parts of the url. The page name is used for logging purposes.
+
+Create a new instance of a page object by passing it a selenium webdriver instance and any other keyword arguments necessary to
+fill in the variables fields of the url pattern. For example::
+
+    page = ThingDetailPage(self.browser, thingId = 123)
+
+When a page object is created it will verify that the browser is currently at the correct URL for the page. A runtime error is
+raised if the browser is currently at any other URL.
+
+BrowserTestCase
+~~~~~~~~~~~~~~~
+
+The browser test case derives from `BaseTestCase` and provides several other features. Create a new browser test case using this
+pattern::
+
+    class BrowserTestCase(LiveServerTestCase, BaseTestCase):
+        _pageClass = ThingDetailPage
+        _requiresLogin = True           # Optional
+
+In the above example `_pageClass` is the class of the PageObject for the page under test. The `_requiresLogin` property tells
+the test case that this page requires the user to be logged in.  When a browser test case starts it will launch the browser,
+log in a user if required, and then browser to the page represented by the given PageObject. An instance of the page object is
+available from a property called `page`.
+
+By default, `BrowserTestCase` uses the "Chrome" webdriver. Set the `BROWSER` environment variable to the name of a different
+webdriver class to change which browser is used to run the tests.

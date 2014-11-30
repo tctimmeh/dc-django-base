@@ -1,13 +1,13 @@
 import string
 
 from abc import ABC, abstractmethod
+from allauth.account.models import EmailAddress
 from random import choice
 from django.contrib.auth.models import User
-from django.test import TestCase
 from django.utils import translation
 
 
-class BaseTestCase(ABC, TestCase):
+class BaseTestCase(ABC):
     def setUp(self):
         self._loggedInUser = None
         self._passwordsByUser = {}
@@ -50,10 +50,15 @@ class BaseTestCase(ABC, TestCase):
         userName = userName or self.randStr()
         password = password or self.randStr()
         email = email or '%s@host.com' % self.randStr()
+
         user = User.objects.create_user(username=userName, password=password, email=email, first_name=self.randStr(), last_name=self.randStr())
         self._passwordsByUser[user] = password
+
+        EmailAddress.objects.create(user=user, email=email, verified=True, primary=True)
+
         if logIn:
             self.logInAs(user)
+
         return user
 
     def createAdminUser(self, userName=None, password=None, *, email=None, save=True, logIn=False):
@@ -83,4 +88,13 @@ class BaseTestCase(ABC, TestCase):
         """
         session.set_expiry(-1)
         session.save()
+
+    def getPasswordForUser(self, user, default=None):
+        """
+        Return the cached password for the given user.
+
+        :param user: The user for whom the password should be retreived
+        :param default: A default password to return if no cached password is found
+        """
+        return self._passwordsByUser.get(user, default)
 

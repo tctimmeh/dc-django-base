@@ -12,7 +12,7 @@ def profile_form_view():
         else:
             raise ImproperlyConfigured('User Profile class [{}] must have model form class'.format(profile_class.__name__))
 
-        ProfileEditor.register_profile_model(model, profile_class.profile_edit_url, profile_class.profile_nav_name)
+        ProfileEditor.register_profile_view(model, profile_class.profile_edit_url, profile_class.profile_nav_name)
         return profile_class
     return _wrapper
 

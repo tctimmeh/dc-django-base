@@ -1,6 +1,5 @@
 from dcbase.models import UserProfile
 from dcbase.tests.unit import UnitTestCase
-from dcbase.views.profile.profileEditGeneral import ProfileEditGeneralView
 from django.utils import translation
 from django.utils.translation import LANGUAGE_SESSION_KEY
 

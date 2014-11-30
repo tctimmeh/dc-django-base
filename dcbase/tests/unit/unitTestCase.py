@@ -1,10 +1,18 @@
 from dcbase.tests import BaseTestCase
+from django.test import TestCase
 
 
-class UnitTestCase(BaseTestCase):
+class UnitTestCase(TestCase, BaseTestCase):
     """
     Base test case for unit tests using the Django test client.
     """
+    def setUp(self):
+        BaseTestCase.setUp(self)
+        super().setUp()
+
+    def tearDown(self):
+        BaseTestCase.tearDown(self)
+        super().tearDown()
 
     def logInAs(self, user, *, password=None):
         """
@@ -15,10 +23,7 @@ class UnitTestCase(BaseTestCase):
         :param password: The password to use for log in. The password used to create the user will be used if none is given.
         """
         username = user.username
-        if password is None:
-            if user not in self._passwordsByUser:
-                raise RuntimeError('No password found for user [{}]. Was it created with a createUser method?'.format(username))
-            password = self._passwordsByUser[user]
+        password = self.getPasswordForUser(user, password)
 
         result = self.client.login(username=username, password=password)
         if not result:

@@ -19,7 +19,7 @@
         <p>
             {{ user.first_name }} {{ user.last_name }}
         </p>
-        <a href="{% url "account_profile_edit" %}" class="btn btn-default">{% trans "Edit Profile" %}</a>
+        <a href="{% url "account_profile_edit" %}" id="edit-profile" class="btn btn-default">{% trans "Edit Profile" %}</a>
         <a class="gravatar-profile" href="{% gravatar_profile_url user %}">Gravatar <span class="glyphicon glyphicon-link"></span></a>
     </div>
 {% endblock %}
