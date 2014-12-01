@@ -2,6 +2,6 @@ from dcbase.tests.browser.pages.pageObject import PageObject
 
 
 class ProfileEditPage(PageObject):
-    _urlPattern = '/accounts/profile/edit/'
+    _urlPattern = 'account_profile_edit'
     _pageName = 'Edit Profile'
 

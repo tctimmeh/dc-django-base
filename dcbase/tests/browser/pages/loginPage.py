@@ -2,7 +2,7 @@ from dcbase.tests.browser.pages.pageObject import PageObject
 
 
 class LoginPage(PageObject):
-    _urlPattern = '/accounts/login/'
+    _urlPattern = 'account_login'
     _pageName = 'Login'
 
     def enterCredentials(self, username, password):

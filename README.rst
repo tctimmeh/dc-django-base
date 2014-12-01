@@ -183,11 +183,11 @@ A page object abstracts all interaction with a web page. Tests should never make
 to create a page object::
 
     class ThingDetailPage(PageObject):
-        _urlPattern = '/thing/{thingId}/'
+        _urlPattern = 'thing:detail'
         _pageName = 'Thing Detail'
 
-The PageObject requires 2 class-level attributes: `_urlPattern` and `_pageName`. The url pattern describes the URL of the page.
-Use python format specifiers in place of the variable parts of the url. The page name is used for logging purposes.
+The PageObject requires 2 class-level attributes: `_urlPattern` and `_pageName`. The url pattern specifies a named URL pattern
+for the page under test. The page name is used for logging purposes.
 
 Create a new instance of a page object by passing it a selenium webdriver instance and any other keyword arguments necessary to
 fill in the variables fields of the url pattern. For example::

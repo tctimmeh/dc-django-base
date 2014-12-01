@@ -1,4 +1,5 @@
 from urllib.parse import urlparse
+from django.core.urlresolvers import reverse
 
 
 class PageObject(object):
@@ -8,15 +9,21 @@ class PageObject(object):
     def __init__(self, browser, **urlFields):
         self.browser = browser
         self._urlFields = urlFields
-        self._assertBrowserAtPageUrl()
+        self._assertBrowserAtThisPage()
+
+    @classmethod
+    def _constructPathUrlPath(cls, urlFields):
+        url = reverse(cls._urlPattern, kwargs=urlFields)
+        return url
 
     @classmethod
     def get(cls, browser, baseUrl, **urlFields):
-        browser.get(baseUrl + cls._urlPattern.format(**urlFields))
+        url = cls._constructPathUrlPath(urlFields)
+        browser.get(baseUrl + url)
         return cls(browser, **urlFields)
 
-    def _assertBrowserAtPageUrl(self):
-        expectedPath = self._urlPattern.format(**self._urlFields)
+    def _assertBrowserAtThisPage(self):
+        expectedPath = self._constructPathUrlPath(self._urlFields)
 
         currentUrl = self.browser.current_url
         result = urlparse(currentUrl)
