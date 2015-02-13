@@ -69,6 +69,7 @@ and overriding the following blocks.
 - **head**: extra content to include in the page head tag. use this to link external css, add meta tags, etc.
 - **headerBarBrand**: content for the "brand" link in the upper right, usually the app title or site logo
 - **headerBarBrandLink**: target of the "brand" link, usually the app's home page. default is site root.
+- **headerBarLeft**: extra nav items (\<li>'s) to include on the left side of the header bar
 - **headerBarRight**: extra nav items (\<li>'s) to include on the right side of the header bar
 - **content**: the main content of the page. should normally start with a div with class "container" or "container-fluid"
 - **footerBar**: content for the footer nav bar
