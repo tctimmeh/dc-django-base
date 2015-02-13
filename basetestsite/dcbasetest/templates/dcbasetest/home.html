@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block pageTitle %}DC Base Test Page{% endblock %}
+
+
+
 {% block content %}
     <div class="container">
         Test Pages:
@@ -20,4 +23,8 @@
             <li><a href="{% url "account_profile_edit" %}">profile edit</a></li>
         </ul>
     </div>
+{% endblock %}
+
+{% block footerBar %}
+    <a class="navbar-link" href="#">Links go here</a>
 {% endblock %}

@@ -71,7 +71,7 @@ and overriding the following blocks.
 - **headerBarBrandLink**: target of the "brand" link, usually the app's home page. default is site root.
 - **headerBarRight**: extra nav items (\<li>'s) to include on the right side of the header bar
 - **content**: the main content of the page. should normally start with a div with class "container" or "container-fluid"
-- **footerBar**: content for the footer nav bar. this is a bootstrap navbar so the content here should probably be a \<ul>
+- **footerBar**: content for the footer nav bar
 - **script**: any additional scripts or script links the page needs. inline scripts must supply their own enclosing \<script> tag
 
 Narrow Dialog Base
