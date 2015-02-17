@@ -1,6 +1,25 @@
 DC Django Base
 ==============
 
+Included Libraries
+------------------
+
+The following libraries are made available to your application by **dc-django-base**.
+
+**Python Libraries**:
+
+* django-widget-tweaks
+* django-allauth
+* django-gravatar2
+* selenium
+
+**Javascript**
+
+* bootstrap 3.3.2
+* jquery 2.1.3
+* jquery cookie 1.4.1
+* jquery form 3.51
+
 Installation
 ------------
 
@@ -32,6 +51,25 @@ Other "list" settings can be modified in a similar way.
 
 Because the order of middleware is important it may be required to copy and modify the entire ``MIDDLEWARE_CLASSES`` setting
 to inject a new middleware class in the middle of the list.
+
+Multiple Settings
+~~~~~~~~~~~~~~~~~
+
+A project often needs to maintain multiple settings files. For example, a project may require different settings for it's
+development, staging, and production sites. Follow this pattern to allow easy switching between settings.
+
+First, create a ``settings_common.py`` file. Fill this file with settings that are common to all configurations. Normally,
+this file would import ``dcbase.base_settings`` as described above and include settings like ``BASE_DIR``, ``ROOT_URLCONF``,
+``INSTALLED_APPS``, etc. For safety, **never** include a setting here that could expose the production site to danger, such as
+``SECRET_KEY`` or ``DEBUG = True``.
+
+Create a settings file for each specific configuration. Include the common settings file (e.g. ``from .settings_common import *``)
+and add settings that are unique to the specific installation. For example, create a ``settings_dev.py`` for development settings and
+``settings_prod.py`` for production settings. This file will normally contain settings like ``SECRET_KEY``, ``DATABASES``,
+``ALLOWED_HOSTS``, etc. Be **very** careful how the production settings file is managed and versioned to avoid exposing sensitive
+information such as the secret key and database credentials.
+
+Finally, create a symlink to the specific settings file. For example, ``ln -s settings_prod.py settings.py``.
 
 Urls
 ````
