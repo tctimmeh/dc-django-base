@@ -8,5 +8,5 @@ register = template.Library()
 def userNameLink(user):
     username = user.username
     profile_url = reverse('account_profile_user', kwargs = {'username': username})
-    return '<a href="{link}">{username}</a>'.format(link=profile_url, username=username)
+    return '<a class="userNameLink" href="{link}">{username}</a>'.format(link=profile_url, username=username)
 

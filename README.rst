@@ -95,6 +95,14 @@ Set the ``autofocus`` context variable to the id of a form field which should be
 
     {% include "dcbase/form.html" with autofocus="id_important_field" %}
 
+Template Tags
+`````````````
+
+user_tags
+~~~~~~~~~
+
+- **{% userNameLink user %}**: insert a link to the given user's profile
+
 User Profiles
 -------------
 
