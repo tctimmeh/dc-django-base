@@ -12,7 +12,7 @@ with open('pip_requirements.txt') as f:
 
 setup(
     name='dc-django-base',
-    version='0.3.1',
+    version='0.3.2',
     packages=find_packages(include=['dcbase*']),
     include_package_data=True,
     install_requires=REQUIREMENTS,
