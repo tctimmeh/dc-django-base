@@ -17,7 +17,7 @@ class DcBaseMiddleware(object):
             tz = datetime.timezone(delta)
             timezone.activate(tz)
             return
-        except ValueError:
+        except (TypeError, ValueError):
             pass
 
         timezone.deactivate()
