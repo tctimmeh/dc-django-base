@@ -120,10 +120,8 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
-    {% if not user.is_authenticated %}
-        <script>$.cookie('_tz_offset', (new Date()).getTimezoneOffset());</script>
-    {% endif %}
     <script>
+        $.cookie('_tz_offset', (new Date()).getTimezoneOffset());
         var dcbase = {
             createUrl: function (urlPattern) {
                 var parts = urlPattern.split('0');

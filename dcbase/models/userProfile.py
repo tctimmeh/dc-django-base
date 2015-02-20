@@ -16,7 +16,9 @@ import pytz
 class UserProfile(Model):
     user = OneToOneField(User, related_name='profile')
     language = CharField(_('Language'), max_length=10, choices=settings.LANGUAGES, default='en')
-    timezone = CharField(_('Time zone'), max_length=40, choices=[(x, x) for x in pytz.common_timezones], default='UTC')
+    timezone = CharField(_('Time zone'), max_length=40,
+                         choices=[(x, x) for x in pytz.common_timezones],
+                         null=True, blank=True, default=None)
 
     @property
     def languageName(self):

@@ -5,4 +5,4 @@ from django.forms import ModelForm
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['timezone', 'language']
+        fields = ['language', 'timezone']
