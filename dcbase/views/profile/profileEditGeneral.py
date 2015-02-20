@@ -1,3 +1,4 @@
+from dcbase.apps import TIMEZONE_SESSION_KEY
 from dcbase.decorator.profileFormView import profile_form_view
 from dcbase.forms.userProfile import UserProfileForm
 from dcbase.views.profile.profileEditFormView import ProfileEditFormView
@@ -16,6 +17,7 @@ class ProfileEditGeneralView(ProfileEditFormView):
     def form_valid(self, form):
         response = super().form_valid(form)
         self.request.session[LANGUAGE_SESSION_KEY] = self.request.POST['language']
+        self.request.session[TIMEZONE_SESSION_KEY] = self.request.POST['timezone']
         return response
 
 profileEditGeneralView = login_required(ProfileEditGeneralView.as_view())

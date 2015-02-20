@@ -32,6 +32,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'dcbase.middleware.DcBaseMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

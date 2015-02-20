@@ -1,3 +1,5 @@
+from dcbase.apps import TIMEZONE_SESSION_KEY
+from django.utils.timezone import get_current_timezone
 from dcbase.models import UserProfile
 from dcbase.tests.unit import UnitTestCase
 from django.utils import translation
@@ -29,3 +31,13 @@ class TestUserProfile(UnitTestCase):
         self.logInAs(user)
         self.assertEqual('fr', self.client.session[LANGUAGE_SESSION_KEY])
 
+    def test_loggingInSetsTimezoneFromProfile(self):
+        expected = 'America/Edmonton'
+        user = self.createUser()
+        user.profile.timezone = expected
+        user.profile.save()
+
+        self.assertNotEqual(expected, get_current_timezone())
+
+        self.logInAs(user)
+        self.assertEqual(expected, self.client.session[TIMEZONE_SESSION_KEY])

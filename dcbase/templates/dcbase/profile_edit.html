@@ -35,6 +35,10 @@
                         <h1 class="panel-title">{% block panelHeading %}{{ profilePanelHeading }}{% endblock %}</h1>
                     </div>
                     <div class="panel-body">
+                        {% if selectedProfileNavLink == "General" %}
+                            <p class="text-muted">{% trans "Current Time" %}: {% now "TIME_FORMAT" %}</p>
+                        {% endif %}
+
                         {% block panelBody %}
                             {% if form %}
                                 <form method="POST">
