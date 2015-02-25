@@ -12,23 +12,43 @@
 
 {% block content %}
     <div class="container">
-        <div>{% now "r T" %}</div>
-        Test Pages:
-        <ul>
-            <li><a href="{% url "account_signup" %}">signup</a></li>
-            <li><a href="{% url "account_login" %}">login</a></li>
-            <li><a href="{% url "account_logout" %}">logout</a></li>
-            <li><a href="{% url "account_change_password" %}">change password</a></li>
-            <li><a href="{% url "account_email" %}">change email</a></li>
-            <li><a href="{% url "account_inactive" %}">inactive</a></li>
-            <li><a href="{% url "account_email_verification_sent" %}">email confirm sent</a></li>
-            <li><a href="{% url "socialaccount_login_cancelled" %}">social login cancelled</a></li>
-            <li><a href="{% url "socialaccount_login_error" %}">social login error</a></li>
-            <li><a href="{% url "socialaccount_signup" %}">social login signup</a></li>
-            <li><a href="{% url "socialaccount_connections" %}">social login connections</a></li>
-            <li><a href="{% url "account_profile" %}">profile</a></li>
-            <li><a href="{% url "account_profile_edit" %}">profile edit</a></li>
-        </ul>
+        <div class="row">
+            <div class="col-xs-3">
+                Test Pages:
+                <ul>
+                    <li><a href="{% url "account_signup" %}">signup</a></li>
+                    <li><a href="{% url "account_login" %}">login</a></li>
+                    <li><a href="{% url "account_logout" %}">logout</a></li>
+                    <li><a href="{% url "account_change_password" %}">change password</a></li>
+                    <li><a href="{% url "account_email" %}">change email</a></li>
+                    <li><a href="{% url "account_inactive" %}">inactive</a></li>
+                    <li><a href="{% url "account_email_verification_sent" %}">email confirm sent</a></li>
+                    <li><a href="{% url "socialaccount_login_cancelled" %}">social login cancelled</a></li>
+                    <li><a href="{% url "socialaccount_login_error" %}">social login error</a></li>
+                    <li><a href="{% url "socialaccount_signup" %}">social login signup</a></li>
+                    <li><a href="{% url "socialaccount_connections" %}">social login connections</a></li>
+                    <li><a href="{% url "account_profile" %}">profile</a></li>
+                    <li><a href="{% url "account_profile_edit" %}">profile edit</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-3">
+                <h3>Normal Form</h3>
+                <form>
+                    {% include "dcbase/form/form.html" %}
+                </form>
+
+                <h4>Single Form Field</h4>
+                {% include "dcbase/form/form-field.html" with field=form.errors %}
+            </div>
+            <div class="col-xs-3">
+                <h3>Horizontal Form</h3>
+                <form class="form-horizontal">
+                    {% include "dcbase/form/form-horizontal.html" with formLabelCols=2 formFieldCols=10 %}
+                </form>
+                <h4>Single Widget</h4>
+                {% include "dcbase/form/form-widget.html" with field=form.errors %}
+            </div>
+        </div>
     </div>
 {% endblock %}
 
