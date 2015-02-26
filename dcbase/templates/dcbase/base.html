@@ -32,6 +32,22 @@
             #logged-in-user-name { margin-right: 10px; }
             .gravatar { box-shadow: 0px 0px 10px 1px white; border-radius: 5px; }
             .narrow-panel-dialog { max-width: 450px; }
+
+            .tt-dropdown-menu {
+                min-width: 150px;
+                padding: 8px 0;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+                -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+                -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+            }
+            .twitter-typeahead { display: block !important; }
+            .tt-suggestion { padding: 5px 5px; }
+            .tt-suggestion.tt-cursor { color: #fff; background-color: #337ab7; }
         </style>
         {% block style %}{% endblock %}
     </head>
@@ -132,6 +148,24 @@
                 }
                 finalUrl += parts[parts.length - 1];
                 return finalUrl;
+            },
+            createUserTypeahead: function(inputElement) {
+                var usersFetch = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    remote: '/accounts/match/?q=%QUERY'
+                });
+                usersFetch.initialize();
+
+                $(inputElement).typeahead(null, {
+                    displayKey: 'value',
+                    source: usersFetch.ttAdapter(),
+                    templates: {
+                        suggestion: function(data) {
+                            return '<img class="gravatar" src="' + data.avatar_url + '" width="25" height="25" /> ' + data.value;
+                        }
+                    }
+                });
             }
         };
     </script>

@@ -1,3 +1,4 @@
+from dcbase.views.matchUsersView import matchUsersView
 from dcbase.views.profile.profile import profileView
 from dcbase.views.profile.profileEditEmail import profileEditEmailView
 from dcbase.views.profile.profileEditGeneral import profileEditGeneralView
@@ -20,5 +21,6 @@ urlpatterns = [
     url(r'^accounts/profile/$', profileView, name='account_profile'),
     url(r'^accounts/profile/edit/$', profileEditUserView, name='account_profile_edit'),
     url(r'^accounts/profile/edit/general/$', profileEditGeneralView, name='account_profile_edit_general'),
-    url(r'^accounts/user/(?P<username>.*)/', profileUserView, name='account_profile_user'),
+    url(r'^accounts/user/(?P<username>.*)/$', profileUserView, name='account_profile_user'),
+    url(r'^accounts/match/$', matchUsersView, name='account_match_users'),
 ]

@@ -48,10 +48,22 @@
                 <h4>Single Widget</h4>
                 {% include "dcbase/form/form-widget.html" with field=form.errors %}
             </div>
+            <div class="col-xs-3">
+                <input id="users-select" class="form-control" type="text" />
+            </div>
         </div>
     </div>
 {% endblock %}
 
 {% block footerBar %}
     <a class="navbar-link" href="#">Links go here</a>
+{% endblock %}
+
+{% block script %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            dcbase.createUserTypeahead('#users-select');
+        });
+    </script>
 {% endblock %}
