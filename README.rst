@@ -167,6 +167,7 @@ the following values:
 
 - **url**: (Required) The URL of the view that renders the form.
 - **small**: Boolean; true if the modal popup should be narrow. Default false.
+- **afterLoad**: function to be called after the form content is loaded from the server. The function is passed one argument: the modal-content div.
 
 Template Tags
 `````````````

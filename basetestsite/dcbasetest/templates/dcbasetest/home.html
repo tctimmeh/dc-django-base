@@ -72,7 +72,10 @@
             dcbase.createUserTypeahead('#users-select');
             $('#popup-form').click(function(e) {
                dcbase.popupAjaxForm({
-                   url: "{% url "popupAjaxForm" %}"
+                   url: "{% url "popupAjaxForm" %}",
+                   afterLoad: function(content) {
+                       console.log(content);
+                   }
                });
             });
         });

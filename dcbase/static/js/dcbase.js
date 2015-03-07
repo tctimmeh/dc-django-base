@@ -54,6 +54,9 @@ var dcbase = {
             $(e.target).remove();
         });
         var setupAjaxForm = function() {
+            if (options.afterLoad) {
+                options.afterLoad(content);
+            }
             content.find('form').ajaxForm({
                 target: content,
                 success: function(response, status, xhr, form) {
