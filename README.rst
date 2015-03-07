@@ -139,21 +139,16 @@ Pop-up Ajax Forms
 
 Create an AJAX-ready form inside a pop-up dialog by following this pattern. First create a view using the standard Django form
 pattern. When the form is new or contains errors then render a template that contains the form as it would appear inside the
-content portion of a boostrap modal dialog. For example this template is a good start::
+content portion of a boostrap modal dialog. The default template ``dcbase/form/popup-form.html`` should be suitable for most cases.
+This template can either be extended or used directly.
 
-    <form method="post" action="{% url "YOUR_FORM_VIEW_URL" %}">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">TITLE OF YOUR Popup Ajax Dialog</h4>
-        </div>
-        <div class="modal-body">
-            {% include "dcbase/form/form.html" %}
-        </div>
-        <div class="modal-footer">
-            <input type="submit" class="btn btn-primary" value="THE SUBMIT BUTTON!!" />
-            <button class="btn btn-default" data-dismiss="modal">Cancel</button>
-        </div>
-    </form>
+To extend the template, override the "url" block to supply the form action, override the "title" block to supply a title for the
+dialog, and, optionally, override the "footer" block to provide controls such as submit buttons. If the "footer" block is not overridden
+then Submit and Cancel buttons will be provided by default.
+
+Normally, only the url, title, and submit button text need to be changed. In this case the popup-form.html template can be used directly.
+Supply a template render context variable "form_url", "dialog_title", and "submit_text" to override these values without extending
+the template. If no text is given for the submit button then the default of "Submit" is used.
 
 When the form is valid the view can take one of two actions. Either render the template again with a new form (for a "submit
 another" pattern) or return a JSON response containing information on how the page should behave.

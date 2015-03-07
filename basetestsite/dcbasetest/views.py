@@ -24,4 +24,8 @@ def popupForm(request):
     else:
         form = TestForm()
 
-    return render(request, 'dcbasetest/testform.html', {'form': form})
+    return render(request, 'dcbase/form/popup-form.html', {
+        'form': form, 'form_url': reverse('popupAjaxForm'),
+        'dialog_title': 'Test Pop-up AJAX Form',
+        'submit_text': 'Make it so!'
+    })
