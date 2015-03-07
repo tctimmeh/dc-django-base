@@ -1,4 +1,15 @@
 $.cookie('_tz_offset', (new Date()).getTimezoneOffset());
+
+$(document).ready(function() {
+    $('a#header-logout').click(function(e) {
+        e.stopPropagation();
+        dcbase.popupAjaxForm({
+            url: logout_url,
+            small: true
+        })
+    });
+});
+
 var dcbase = {
     createUrl: function (urlPattern) {
         var parts = urlPattern.split('0');

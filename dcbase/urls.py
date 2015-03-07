@@ -1,3 +1,4 @@
+from dcbase.views.logout import DcLogoutView
 from dcbase.views.matchUsersView import matchUsersView
 from dcbase.views.profile.profile import profileView
 from dcbase.views.profile.profileEditEmail import profileEditEmailView
@@ -17,6 +18,7 @@ urlpatterns = [
     url(r'^accounts/password/change/$', profileEditPasswordView, name='account_profile_edit_password'),
     url(r'^accounts/email/$', profileEditEmailView, name='account_email'),
     url(r'^accounts/social/connections/$', profileEditSocialView, name='socialaccount_connections'),
+    url(r'^accounts/logout/$', DcLogoutView.as_view(), name='account_logout'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/profile/$', profileView, name='account_profile'),
     url(r'^accounts/profile/edit/$', profileEditUserView, name='account_profile_edit'),

@@ -64,10 +64,16 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a id="header-user-profile" href={% url "account_profile" %}>Profile</a>
+                                        <a id="header-user-profile" href={% url "account_profile" %}>
+                                            {% trans "Profile" %}
+                                        </a>
                                     </li>
                                     <li class="divider"></li>
-                                    <li><a id="header-logout" href="{% url "account_logout" %}">{% trans "Sign Out" %}</a></li>
+                                    <li>
+                                        <a id="header-logout" href="#">
+                                            {% trans "Sign Out" %}
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         {% else %}
@@ -110,7 +116,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <script src="{% static "js/dcbase.js" %}"></script>
-    <script>var static_root='{% static "" %}';</script>
+    <script>
+        var static_root='{% static "" %}';
+        var logout_url="{% url "account_logout" %}";
+    </script>
     {% block script %}{% endblock %}
 
     </body>

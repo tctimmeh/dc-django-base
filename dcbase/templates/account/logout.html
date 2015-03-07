@@ -1,21 +1,10 @@
-{% extends "dcbase/base-narrow-dialog.html" %}
+{% extends "dcbase/form/popup-form.html" %}
 {% load i18n %}
 
-{% block pageTitle %}{% trans "Sign Out" %}{% endblock %}
+{% block url %}{% url "account_logout" %}{% endblock %}
 
-{% block panelHeading %}
-    <h1>{% trans "Sign Out" %}</h1>
-{% endblock %}
+{% block title %}{% trans "Sign Out" %}{% endblock %}
 
-{% block panelBody %}
+{% block beforeForm %}
     <p>{% trans 'Are you sure you want to sign out?' %}</p>
-
-    <form method="post" action="{% url 'account_logout' %}">
-        {% csrf_token %}
-        {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-        {% endif %}
-        <button class="btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
-    </form>
 {% endblock %}
-
