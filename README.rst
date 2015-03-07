@@ -133,6 +133,46 @@ Set the ``autofocus`` context variable to the id of a form field which should be
 
     {% include "dcbase/form.html" with autofocus="id_important_field" %}
 
+
+Pop-up Ajax Forms
+~~~~~~~~~~~~~~~~~
+
+Create an AJAX-ready form inside a pop-up dialog by following this pattern. First create a view using the standard Django form
+pattern. When the form is new or contains errors then render a template that contains the form as it would appear inside the
+content portion of a boostrap modal dialog. For example this template is a good start::
+
+    <form method="post" action="{% url "YOUR_FORM_VIEW_URL" %}">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">TITLE OF YOUR Popup Ajax Dialog</h4>
+        </div>
+        <div class="modal-body">
+            {% include "dcbase/form/form.html" %}
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="THE SUBMIT BUTTON!!" />
+            <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+    </form>
+
+When the form is valid the view can take one of two actions. Either render the template again with a new form (for a "submit
+another" pattern) or return a JSON response containing information on how the page should behave.
+
+The JSON response must be a map. It must have a key called "action" that describes what action the page should take. Possible
+values are:
+
+- **reload**: The page will be reloaded at the current URL.
+- **close**: The modal dialog will be closed and destroyed.
+- **redirect**: The page will be redirected to the url given by the "url" member of the JSON response.
+
+For example, returning a JSON response of ``{action: 'redirect', url: '/foo'}`` will cause the page to redirect to /foo.
+
+Launch the pop-up form by calling the ``dcbase.popupAjaxForm(options)`` function. The "options" argument is an object which accepts
+the following values:
+
+- **url**: (Required) The URL of the view that renders the form.
+- **small**: Boolean; true if the modal popup should be narrow. Default false.
+
 Template Tags
 `````````````
 

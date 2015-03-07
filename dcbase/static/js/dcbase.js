@@ -28,5 +28,52 @@ var dcbase = {
                 }
             }
         });
+    },
+
+    popupAjaxForm: function(options) {
+        options = $.extend({
+            small: false
+        }, options);
+
+        var initialContent = $('<div class="modal-body">' +
+            '<div style="width:32px; margin: auto"><img src="' + static_root + '/img/wait-lg.gif" /></div>' +
+            '</div>'
+        );
+        var content = $('<div />').addClass('modal-content');
+        content.append(initialContent);
+        var dialog = $('<div />').addClass('modal-dialog');
+        if (options.small) {
+            dialog.addClass('modal-sm');
+        }
+        dialog.append(content);
+        var modal = $('<div />').addClass('modal fade');
+        modal.append(dialog);
+        $('#content-wrapper').append(modal);
+        modal.modal('show');
+        modal.on('hidden.bs.modal', function(e) {
+            $(e.target).remove();
+        });
+        var setupAjaxForm = function() {
+            content.find('form').ajaxForm({
+                target: content,
+                success: function(response, status, xhr, form) {
+                    if (xhr.responseJSON) {
+                       switch(xhr.responseJSON.action) {
+                           case 'reload':
+                               window.location.reload();
+                               break;
+                           case 'close':
+                               modal.modal('hide');
+                               break;
+                           case 'redirect':
+                               window.location = xhr.responseJSON.url;
+                               break;
+                       }
+                    }
+                    setupAjaxForm();
+                }
+            });
+        };
+        content.load(options.url, setupAjaxForm);
     }
 };
