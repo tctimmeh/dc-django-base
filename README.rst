@@ -162,6 +162,26 @@ values are:
 
 For example, returning a JSON response of ``{action: 'redirect', url: '/foo'}`` will cause the page to redirect to /foo.
 
+If using class-based views, include the PopupFormMixin in the list of base classes **before** the other base view classes. This
+mixin class allows the following customizations:
+
+**Class-level Properties**
+
+- **form_valid_action**: The action to take when the form is valid. Must be a PopupValidAction value. Default is reload.
+- **form_url**: URL that generates and handles this form. Default is to use the path portion of the incoming HTTP request.
+- **dialog_title**: Text to put in the header bar of the pop-up dialog. Default is None.
+- **submit_text**: Text for the default submit button. Default is "Submit".
+- **submit_style**: Bootstrap style (e.g. info, danger, etc.) for the default submit button. Default is "primary".
+- **success_url**: The URL to redirect to when the action is redirect.
+
+**Methods**
+
+Each of the above class-level properties has a corresponding "get_*" method. Additionally, the following methods can be overridden
+or extended:
+
+- **popup_form_valid()**: Returns an HttpResponse as appropriate for the view's action.
+- **get_new_form()**: Returns a new form instance with initial data, regardless of any data on the incoming request.
+
 Launch the pop-up form by calling the ``dcbase.popupAjaxForm(options)`` function. The "options" argument is an object which accepts
 the following values:
 

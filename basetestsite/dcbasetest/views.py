@@ -1,13 +1,15 @@
-from django.contrib import messages
+from dcbase.views.generic.popupFormView import PopupFormMixin, PopupValidAction
 from django.core.urlresolvers import reverse
 from django.forms import Form, CharField, BooleanField
-from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.views.generic import FormView
+
 
 class TestForm(Form):
     text = CharField(max_length=20, help_text="Help!", required=False)
     errors = CharField(max_length=10, required=True)
     option = BooleanField(help_text="It's a good option...", required=False)
+
 
 def home(request):
     form = TestForm(data={'text': '', 'errors': '', 'option': False})
@@ -15,20 +17,17 @@ def home(request):
     form.add_error('errors', 'Field error')
     return render(request, 'dcbasetest/home.html', {'form': form})
 
-def popupForm(request):
-    if request.method == 'POST':
-        form = TestForm(request.POST)
-        if form.is_valid():
-            return JsonResponse({'action': 'reload'})
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = TestForm()
+class PopupForm(PopupFormMixin, FormView):
+    form_valid_action = PopupValidAction.redirect
+    form_class = TestForm
+    dialog_title = 'Test Pop-up AJAX Form'
+    submit_style = 'primary'
+    submit_text = 'Make it so!'
 
-    messages.success(request, "Example non-form message!")
-    return render(request, 'dcbase/form/popup-form.html', {
-        'form': form, 'form_url': reverse('popupAjaxForm'),
-        'dialog_title': 'Test Pop-up AJAX Form',
-        'submit_text': 'Make it so!',
-        'submit_style': 'info',
-    })
+    def get_success_url(self):
+        return reverse('account_email')
+
+
+popupForm = PopupForm.as_view()
+
