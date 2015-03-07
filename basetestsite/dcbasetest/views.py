@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.forms import Form, CharField, BooleanField
 from django.http import JsonResponse, HttpResponseRedirect
@@ -24,8 +25,10 @@ def popupForm(request):
     else:
         form = TestForm()
 
+    messages.success(request, "Example non-form message!")
     return render(request, 'dcbase/form/popup-form.html', {
         'form': form, 'form_url': reverse('popupAjaxForm'),
         'dialog_title': 'Test Pop-up AJAX Form',
-        'submit_text': 'Make it so!'
+        'submit_text': 'Make it so!',
+        'submit_style': 'info',
     })

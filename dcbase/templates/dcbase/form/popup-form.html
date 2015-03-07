@@ -6,11 +6,15 @@
         <h4 class="modal-title">{% block title %}{{ dialog_title }}{% endblock %}</h4>
     </div>
     <div class="modal-body">
+        {% include "dcbase/messages.html" %}
+
+        {% block beforeForm %}{% endblock %}
         {% include "dcbase/form/form.html" %}
+        {% block afterForm %}{% endblock %}
     </div>
     <div class="modal-footer">
         {% block footer %}
-            <input type="submit" class="btn btn-primary" value="{{ submit_text|default:"Submit" }}" />
+            <input type="submit" class="btn btn-{{ submit_style|default:"primary" }}" value="{{ submit_text|default:"Submit" }}" />
             <button class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
         {% endblock %}
     </div>
