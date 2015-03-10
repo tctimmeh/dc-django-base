@@ -2,3 +2,4 @@ include LICENSE
 include README.rst
 include pip_requirements.txt
 recursive-include dcbase/templates *
+recursive-include dcbase/static *
