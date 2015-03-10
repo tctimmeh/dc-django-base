@@ -137,7 +137,17 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <script>
-        $.cookie('_tz_offset', (new Date()).getTimezoneOffset());
+        {% if dcbase_need_tz_offset %}
+            function setTzOffsetCookie() {
+                $.removeCookie('_tz_offset'); // TODO:: remove me later
+                var now = new Date();
+                var jan = new Date(now.getFullYear(), 0, 1);
+                var jul = new Date(now.getFullYear(), 6, 1);
+                var offset = Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+                $.cookie('_tz_offset', offset, {path: '/'});
+            }
+            setTzOffsetCookie();
+        {% endif %}
         var dcbase = {
             createUrl: function (urlPattern) {
                 var parts = urlPattern.split('0');
