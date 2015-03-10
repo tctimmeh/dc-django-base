@@ -18,6 +18,9 @@ class DcBaseMiddleware(object):
             timezone.activate(tz)
             return
         except (TypeError, ValueError):
-            pass
+            # The context processor will pick this up and add it to the next template
+            # context. The base template will then add some js to create the above
+            # _tz_offset cookie.
+            request.needTzOffset = True
 
         timezone.deactivate()

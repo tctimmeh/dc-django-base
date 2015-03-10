@@ -1,5 +1,3 @@
-$.cookie('_tz_offset', (new Date()).getTimezoneOffset());
-
 $(document).ready(function() {
     $('a#header-logout').click(function(e) {
         e.stopPropagation();
