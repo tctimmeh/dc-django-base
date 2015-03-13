@@ -119,17 +119,15 @@
     <script>
 var static_root='{% static "" %}';
 var logout_url="{% url "account_logout" %}";
-{% if dcbase_need_tz_offset %}
+{#{% if dcbase_need_tz_offset %}#}
     function setTzOffsetCookie() {
         $.removeCookie('_tz_offset'); // TODO:: remove me later
         var now = new Date();
-        var jan = new Date(now.getFullYear(), 0, 1);
-        var jul = new Date(now.getFullYear(), 6, 1);
-        var offset = Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+        var offset = now.getTimezoneOffset();
         $.cookie('_tz_offset', offset, {path: '/'});
     }
     setTzOffsetCookie();
-{% endif %}
+{#{% endif %}#}
     </script>
     {% block script %}{% endblock %}
 
